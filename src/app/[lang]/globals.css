@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card-color1: #6DE1D2;
+  --card-color2: #FFD63A;
+  --card-color3: #FFA955;
+  --card-color4: #7E8EF1;
+  --card-color5: #89AC46;
+  --card-color6: #F8ED8C;
+  --error-color: #F75A5A; /* Used for cases like showing an error */
+  --danger-color: #F75A5A; /* Used for cases like exiting a page */
+  --warn-error: #ff8800;
+  --success-color: #80ed99;
+  --primary-color: #72ddf7;
+  --secondary-color: #fdc5f5;
+  --primary-text-collor: rgb(27, 28, 29);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('/fonts/vazir-font-v16.1.0/Vazir.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+body  {
+  background: var(--background);
+  /* color: var(--foreground); */
+  color: var(--primary-text-collor);
+  font-family: Vazir;
+  direction: rtl;
+}
+body * {
+  font-family: Vazir;
+  direction: rtl;
+}
+
+a, a:visited, a:hover {
+  color: inherit;
+}

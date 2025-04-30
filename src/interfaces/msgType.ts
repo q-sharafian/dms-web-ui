@@ -1,0 +1,1 @@
+export type MsgTypes = "info" | "success" | "warn" | "error" | "loading";

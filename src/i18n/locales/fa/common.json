@@ -1,0 +1,32 @@
+{
+  "common": {
+    "docs": "مستندات",
+    "event": "رویداد",
+    "events": "رویداد ها",
+    "otherOptions": "سایر موارد",
+    "exit": "خروج",
+    "latestSentEntities": "آخرین {0} ارسال شده",
+    "search": "جستجو",
+    "report": "گزارش",
+    "redirectingTo": "در حال هدایت به {0}",
+    "indexPage": "صفحه اصلی",
+    "detailsOf": "مشخصات {0}",
+    "save": "ذخیره",
+    "ok": "تایید",
+    "close": "بستن"
+  },
+  "login": {
+    "wellcome": "خوش آمدید {0}"
+  },
+  "docs": {
+    "doc": "مستند"
+  },
+  "auth": {
+    "authTokenEmpty": "مقدار auth-token واقع در نوار آدرس، خالی است.",
+    "authTokenInvalid": "مقدار auth-token واقع در نوار آدرس، نامعتبر است.",
+    "test": "The item {0} costs {1}."
+  },
+  "network": {
+    "occuredProblemDuringApiCallTryAgain": "مشکلی در هنگام دریافت پاسخ از سرور رخ داد. لطفا مجددا امتحان نمایید."
+  }
+}

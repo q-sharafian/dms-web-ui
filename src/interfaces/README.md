@@ -1,0 +1,1 @@
+- This module contains the interfaces, types, and enums used across the application.

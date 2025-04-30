@@ -1,0 +1,3 @@
+NEXT_PUBLIC_API_URL='http://localhost:5236/api/v1'
+# It could be development or production
+NODE_ENV='development'
