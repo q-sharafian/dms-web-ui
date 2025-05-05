@@ -31,9 +31,10 @@ export default function Dummy({
   const [redirectMsg, setRedirectMsg] = useState('');
   const [, setAuthKey] = useCUPStorage(LSFieldKey.AuthToken, authToken)
   const [, setUsername] = useCUPStorage(LSFieldKey.RealUserName, "")
+  const [, setUserID] = useCUPStorage(LSFieldKey.userID, "")
   const [, setDict] = useState<any>(null);
   // const { data: user, loading, error, execute: fetchUsers } = useApi(
-    const { data: user } = useApi(
+  const { data: user } = useApi(
     userService.getCurrentUser,
     true
   )
@@ -49,11 +50,12 @@ export default function Dummy({
         setRedirectMsg(t((d as any)?.common?.redirectingTo, (d as any)?.common?.indexPage))
         setAuthKey(authToken)
         setUsername(user?.data.name || "")
+        setUserID(user?.data?.id ?? "")
         router.push(routes.index)
       }
     }
     f();
-  }, [lang, authToken, setAuthKey, router, setUsername, user?.data.name]);
+  }, [lang, authToken, setAuthKey, router, setUsername, user?.data.name, user?.data?.id, setUserID]);
 
   return (
     <div>

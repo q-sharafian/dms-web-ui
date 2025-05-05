@@ -8,7 +8,7 @@ import { useEffect } from "react"
 interface UseApiResponse<T> {
   data: T | null
   loading: boolean
-  error: Error | null
+  error: ApiResponse<string> | null
   execute: (...args: any[]) => Promise<T | undefined>
 }
 
@@ -37,63 +37,70 @@ export function useDMSApi<T>(
   acceptableMsgs?: MsgTypes[]
 ): UseApiResponse<ApiResponse<T>> {
   const { showMsg } = useCMessage()
-  // const handleMsg = <T>(
-  //   resp: ApiResponse<T> | null,
-  //   acceptableMsgs: MsgTypes[] | undefined,
-  // ) => {
-  //   if (acceptableMsgs == undefined) return
-  //   else if (resp == null && acceptableMsgs.includes('error')) {
-  //     showMsg("error", "مشکلی در هنگام دریافت پاسخ از سرور رخ داد. لطفا مجددا امتحان نمایید.2");
-  //     return;
-  //   }
-  // }
   const { data, loading, error, execute } = useApi(
     apiFunction,
     immediate,
     setLoadingC
   )
+  let formattedError: ApiResponse<string> | null = null
+  let returnData: ApiResponse<T> | null = null
 
+  if (!loading) {
+    if(data?.responseType == 'error' || data?.responseType == 'warn') {
+      formattedError = {
+        data: data.data as string ?? "",
+        statusCode: data.statusCode,
+        responseType: data.responseType,
+        message: data.message
+      }
+      returnData = null
+    }
+    else {
+      formattedError = null
+      returnData = data
+    }
+  }
   useEffect(() => {
-    if (!loading && data != null) {
+    if (!loading && (data != null|| error != null)) {
       // showMsg(data, acceptableMsgs);
       handleMsg(data, acceptableMsgs, showMsg);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, loading])
 
-  return { data, loading, error, execute }
+  return { data: returnData, loading, error: formattedError, execute }
 }
 
 function handleMsg<T>(
-  resp: ApiResponse<T> | null,
+  data: ApiResponse<T> | null,
   acceptableMsgs: MsgTypes[] | undefined,
   showMsg: (type: MsgTypes, message: string) => void
 ) {
-  if (acceptableMsgs == undefined) return
-  else if (resp == null && acceptableMsgs.includes('error')) {
+  if (acceptableMsgs == undefined || acceptableMsgs?.length == 0) return
+  else if (data == null && acceptableMsgs.includes('error')) {
     showMsg("error", "مشکلی در هنگام دریافت پاسخ از سرور رخ داد. لطفا مجددا امتحان نمایید.2");
     return;
   }
-
-  switch (resp?.responseType) {
+  
+  switch (data?.responseType) {
     case 'error':
       if (acceptableMsgs.includes('error')) {
-        showMsg("error", resp.message ?? "خطا");
+        showMsg("error", data.message ?? "خطا");
       }
       break;
     case 'info':
       if (acceptableMsgs.includes('info')) {
-        showMsg("info", resp.message ?? "اطلاع");
+        showMsg("info", data.message ?? "اطلاع");
       }
       break;
     case 'warn':
       if (acceptableMsgs.includes('warn')) {
-        showMsg("warn", resp.message ?? "هشدار غیر منتظره");
+        showMsg("warn", data.message ?? "هشدار غیر منتظره");
       }
       break;
     case 'success':
       if (acceptableMsgs.includes('success')) {
-        showMsg("success", resp.message ?? "موفقیت غیر منتظره");
+        showMsg("success", data.message ?? "موفقیت غیر منتظره");
       }
       break;
   }

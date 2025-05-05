@@ -8,6 +8,7 @@ export interface UserPreferences {
    * Number of tasks we expect to complete for the application to be usable.
    */
   loading: number | null
+  userID: string | null
 }
 
 /**
@@ -16,5 +17,6 @@ export interface UserPreferences {
 export enum LSFieldKey {
   AuthToken = "authToken",
   RealUserName = "realUserName",
-  Loading = "loading"
+  Loading = "loading",
+  userID = "userID"
 }

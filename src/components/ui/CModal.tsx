@@ -13,6 +13,7 @@ interface CModalProps {
   /** Text of the Cancel button */
   cancelText?: React.ReactNode;
   className?: string;
+  footer?: React.ReactNode;
   style?: React.CSSProperties;
   children?: React.ReactNode;
 }
@@ -26,6 +27,7 @@ const CModal: React.FC<CModalProps> = (p: CModalProps) => {
       open={p.open}
       onCancel={p.onCancel}
       okText={p.okText}
+      {...p.footer!=null && {footer: p.footer}}
       cancelText={p.cancelText}
       style={{ ...p.style }}
       styles={{ footer: { bottom: 0, position: "absolute" } }}

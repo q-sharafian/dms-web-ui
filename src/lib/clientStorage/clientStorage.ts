@@ -2,14 +2,6 @@ import { LSFieldKey, UserPreferences } from "@/interfaces/clientStorageData"
 import { logger } from "@/lib/logger/logger"
 import { isRunOnServer } from "../utils"
 
-// export const getUserPreferences = (): UserPreferences => {
-//   const authToken = localStorage.getItem(LSFieldKey.AuthToken)
-//   return {
-//     authToken: authToken ?? null,
-//     realUserName: localStorage.getItem(LSFieldKey.RealUserName) ?? null
-//   }
-// }
-
 export class ClientStorage {
   /**
  * Get an item of user preferences.  

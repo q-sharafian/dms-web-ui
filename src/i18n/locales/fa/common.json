@@ -3,6 +3,7 @@
     "docs": "مستندات",
     "event": "رویداد",
     "events": "رویداد ها",
+    "jobPosition": "عنوان شغلی",
     "otherOptions": "سایر موارد",
     "exit": "خروج",
     "latestSentEntities": "آخرین {0} ارسال شده",
@@ -12,14 +13,26 @@
     "indexPage": "صفحه اصلی",
     "detailsOf": "مشخصات {0}",
     "save": "ذخیره",
+    "create": "ایجاد",
     "ok": "تایید",
-    "close": "بستن"
+    "close": "بستن",
+    "createA": "ایجاد {0}",
+    "notFoundAny": "موردی یافت نشد",
+    "notFoundEntity": "{0} یافت نشد",
+    "pleaseSelectFirst": "لطفا نخست {0} را انتخاب کنید",
+    "nameOf": "نام {0}",
+    "name": "نام",
+    "descriptionOf": "توضیحات {0}",
+    "valueOfIsRequired": "وارد کردن {0} اجباری است!"
   },
   "login": {
     "wellcome": "خوش آمدید {0}"
   },
   "docs": {
     "doc": "مستند"
+  },
+  "event": {
+    "anEvent": "رویدادی"
   },
   "auth": {
     "authTokenEmpty": "مقدار auth-token واقع در نوار آدرس، خالی است.",

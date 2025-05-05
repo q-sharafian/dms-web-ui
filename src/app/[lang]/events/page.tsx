@@ -1,18 +1,17 @@
 'use client';
 
-import { t } from "@/lib/utils"
+import { isRunOnServer, t } from "@/lib/utils"
 import { Locale } from '@/i18n/settings';
 import { getDictionary } from "@/i18n/get-dictionary";
-import DocsList from "@/components/doc/DocsList";
+import EventsList from "@/components/event/EventsList";
 import { useEffect, useState } from "react";
 import { LSFieldKey } from "@/interfaces/clientStorageData";
 import useCUPStorage from "@/hooks/useClientStorage";
-import Head from "next/head";
 import { FloatButton } from "antd";
 import { PlusCircleOutlined } from '@ant-design/icons';
-import DocCreate from "@/components/doc/DocCreate";
+import EventCreate from "@/components/event/EventCreate";
 
-export default function Docs(
+export default function Events(
   {
     params,
     searchParams
@@ -29,6 +28,10 @@ export default function Docs(
   const offset = Number(searchParams["offset"]) || 0;
 
   useEffect(() => {
+    if (isRunOnServer()) return
+    document.title = t(dict?.common?.latestSentEntities, dict?.common?.events)
+  }, [dict])
+  useEffect(() => {
     async function f() {
       const d = await getDictionary(lang);
       setDict(d);
@@ -39,16 +42,21 @@ export default function Docs(
 
   return (
     <div className="App">
-      <FloatButton icon={<PlusCircleOutlined />} tooltip={t(dict?.common?.createA, dict?.docs?.doc)}
+      {/* <Head>
+        <title>{t(dict?.common?.latestSentEntities, dict?.common?.docs)}</title>
+      </Head> */}
+
+      <FloatButton icon={<PlusCircleOutlined />} tooltip={t(dict?.common?.createA, dict?.common?.event)}
         onClick={() => { setModalCreateDocState(true) }}
       />
-      <DocCreate dict={dict} jobPositionID={jobPositionID} modalState={modalCreateDocState}
-        setModalState={(val: boolean) => { setModalCreateDocState(val) }} />
-      {dict && <Head>
-        <title>{t(dict.common.latestSentEntities, dict.common.docs)}</title>
-      </Head>}
+      <EventCreate
+        dict={dict}
+        jobPositionID={jobPositionID}
+        modalState={modalCreateDocState}
+        setModalState={(val: boolean) => { setModalCreateDocState(val) }}
+      />
       {dict && <p>{t(dict.common.latestSentEntitiesDesc)}</p>}
-      <DocsList authToken={authKey} dictionary={dict} offset={offset} limit={limit} jobPositionID={jobPositionID} />
+      <EventsList authToken={authKey} dict={dict} offset={offset} limit={limit} jobPositionID={jobPositionID} />
     </div>
   )
 }

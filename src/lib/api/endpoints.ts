@@ -22,6 +22,13 @@ export const endpoints = {
     get: (id: number) => `/users/${id}`,
     posts: (userId: number) => `/users/${userId}/posts`,
   },
+  jobPositions: {
+    listCurrentUserJPs: (userID: string) => `/user/jps?id=${userID}`
+  },
+  events: {
+    list: () => '/events',
+    create: () => '/events',
+  },
   posts: {
     list: () => '/posts',
     get: (id: number) => `/posts/${id}`,

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import DocCard from "./DocCard";
 import Loading from "../ui/Loading";
 import { useLoading } from "@/hooks/useLoading";
-import DocDetails from "./DocDetails";
+import DovViewEdit from "./DovViewEdit";
 import { useDMSApi } from "@/hooks/useDMSApi";
 
 interface DocsPageProps {
@@ -41,10 +41,7 @@ const DocsList = ({ authToken, dictionary, style, className, offset, limit, jobP
 
   useEffect(() => {
     if (docsErr) {
-      // perform action when docsErr changes
       logger.error(`failed to get last docs for ${jobPositionID}: ${(docsErr as Error).message}`)
-      // or call a function, or dispatch an action, etc.
-      // setLoading(1)
     }
   }, [docsErr, jobPositionID]);
 
@@ -60,7 +57,7 @@ const DocsList = ({ authToken, dictionary, style, className, offset, limit, jobP
   return (
     <div style={{ ...style }} className={className}>
       <Loading count={loadingCount} />
-      <DocDetails
+      <DovViewEdit
         dictionary={dictionary} closeModal={closeDocModal} isOpenModal={modalDocState}
         doc={selectedModalDoc} jobPositionID={jobPositionID}
       />

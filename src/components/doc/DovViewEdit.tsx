@@ -2,7 +2,7 @@ import { DocWithEventName } from "@/lib/api/services/DocService"
 import { t } from "@/lib/utils"
 import CModal from "../ui/CModal"
 
-interface DocDetailsProps {
+interface DocViewEditProps {
   style?: React.CSSProperties
   className?: string
   /** Job position ID is responsible of sending/getting requests to the server */
@@ -14,7 +14,8 @@ interface DocDetailsProps {
   closeModal: () => void
 }
 
-const DocDetails: React.FC<DocDetailsProps> = (p: DocDetailsProps) => {
+/** A component to see all related-doc details and editing them. */
+const DovViewEdit: React.FC<DocViewEditProps> = (p: DocViewEditProps) => {
   return (
     <CModal
       title={t(p.doc?.event_name as string)}
@@ -30,4 +31,4 @@ const DocDetails: React.FC<DocDetailsProps> = (p: DocDetailsProps) => {
   )
 }
 
-export default DocDetails;
+export default DovViewEdit;

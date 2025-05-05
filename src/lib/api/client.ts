@@ -86,7 +86,19 @@ class ApiClient {
         // Handle specific error cases
         if (error.response?.status === 401) {
           // Handle unauthorized access
-          window.location.href = process.env.NEXT_PUBLIC_REDIRECT_TO_LOGIN || '/login'
+          // TODO: Enable it
+          // window.location.href = process.env.NEXT_PUBLIC_REDIRECT_TO_LOGIN || '/login'
+        }
+        return Promise.reject(error)
+      }
+    )
+
+    // Behave with errors like success responses
+    this.client.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status <= 505) {
+          return error.response
         }
         return Promise.reject(error)
       }
